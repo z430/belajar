@@ -94,24 +94,28 @@ function calculateScore() {
   alert("Your Score is " + score + "%");
 }
 
-nextButton.addEventListener("click", function () {
-  if (index < questions.length) {
-    checkAnswer(index);
-    index++;
-    showQuestion(index);
-  }
-
+function nextQuestion() {
+  checkAnswer(index);
+  index++;
+  showQuestion(index);
   if (index >= questions.length - 1) {
     nextButton.textContent = "Finish";
-    console.log("Quiz Completed")
+  }
+}
+
+nextButton.addEventListener("click", function () {
+  if (index < questions.length - 1) {
+    nextQuestion();
+  } else {
+    checkAnswer(index);
+    calculateScore();
   }
 });
 
 prevButton.addEventListener("click", function () {
-  checkAnswer(index);
   if (index > 0) {
     index--;
+    nextButton.textContent = "Next";
     showQuestion(index);
   }
 });
-
